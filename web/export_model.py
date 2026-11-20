@@ -5,8 +5,9 @@ Weights are quantized to 8-bit integers with one float scale per output neuron
 float32 to ~240 KB. The script reports test accuracy before and after
 quantization so the trade-off is measured, not assumed.
 
-    python examples/mnist.py        # trains and saves data/mnist_mlp.npz
-    python web/export_model.py      # writes web/model.js
+    python web/train_demo_model.py              # MNIST + styled digits -> data/demo_mlp.npz
+    python web/export_model.py data/demo_mlp.npz  # writes web/model.js
+    (default model path: data/mnist_mlp.npz from examples/mnist.py)
 """
 import base64
 import json
@@ -38,7 +39,9 @@ def forward(X, layers):
 
 
 def main():
-    weights = dict(np.load(os.path.join(ROOT, "data", "mnist_mlp.npz")))
+    path = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "data", "mnist_mlp.npz")
+    weights = dict(np.load(path))
+    print(f"exporting {path}")
     _, _, X_test, y_test = load_mnist(os.path.join(ROOT, "data", "mnist"), download=False)
 
     float_layers = [(weights[f"{k}.W"], weights[f"{k}.b"]) for k in LAYER_KEYS]

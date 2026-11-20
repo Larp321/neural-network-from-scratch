@@ -239,6 +239,27 @@ class TestDataAndMetrics(unittest.TestCase):
         self.assertEqual(metrics.accuracy(np.array([[2.0], [-1.0]]), np.array([[1], [0]])), 1.0)
 
 
+class TestHandwriting(unittest.TestCase):
+    def test_every_style_renders_mnist_like_images(self):
+        from tinynet.handwriting import STYLES, make_styled_digits
+        X, y, s = make_styled_digits(2, rng=np.random.default_rng(0), return_styles=True)
+        self.assertEqual(X.shape, (2 * len(STYLES), 784))
+        self.assertEqual(set(s), set(STYLES))
+        self.assertTrue(np.all((X >= 0) & (X <= 1)))
+        for img, label, name in zip(X.reshape(-1, 28, 28), y, s):
+            self.assertEqual(label, STYLES[name][0])
+            self.assertGreater(img.sum(), 10, name)            # visible ink
+            ys, xs = np.nonzero(img > 0.1)
+            self.assertLessEqual(max(np.ptp(xs), np.ptp(ys)) + 1, 21, name)  # longest side scaled to ~20 px
+            yy, xx = np.mgrid[0:28, 0:28]
+            com = ((xx * img).sum() / img.sum(), (yy * img).sum() / img.sum())
+            self.assertLess(max(abs(com[0] - 14), abs(com[1] - 14)), 1.0, name)  # centred by mass
+
+    def test_preprocess_empty_canvas(self):
+        from tinynet.handwriting import CANVAS, preprocess
+        self.assertIsNone(preprocess(np.zeros((CANVAS, CANVAS))))
+
+
 class TestViz(unittest.TestCase):
     def test_png_signature_and_plots(self):
         self.assertTrue(viz.png_bytes(np.zeros((4, 5, 3), np.uint8)).startswith(b"\x89PNG"))

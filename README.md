@@ -1,11 +1,11 @@
 # tinynet — a neural network from scratch in NumPy
 
-![tests](https://img.shields.io/badge/tests-26%20passing-brightgreen) ![python](https://img.shields.io/badge/python-3.10%2B-blue) ![deps](https://img.shields.io/badge/dependencies-numpy%20only-orange) ![license](https://img.shields.io/badge/license-MIT-lightgrey)
+![tests](https://img.shields.io/badge/tests-28%20passing-brightgreen) ![python](https://img.shields.io/badge/python-3.10%2B-blue) ![deps](https://img.shields.io/badge/dependencies-numpy%20only-orange) ![license](https://img.shields.io/badge/license-MIT-lightgrey)
 
 A small, readable deep-learning library built **without any ML framework** — no
 PyTorch, TensorFlow or scikit-learn. Every forward pass, every gradient and
 every optimizer update is written by hand in NumPy (~1,100 lines including plotting), verified with
-numerical gradient checking, and demonstrated on six experiments — including
+numerical gradient checking, and demonstrated on seven experiments — including
 **98.27 % test accuracy on MNIST** handwritten digits.
 
 Even the charts below are drawn by a dependency-free SVG/PNG plotter written
@@ -20,18 +20,20 @@ a 2-hidden-layer network learns the curved boundary (99.3%).</em></p>
 
 ## Live demo: draw a digit
 
-The trained MNIST network also runs **in the browser**. Draw a digit and it predicts
-as you draw, showing the probability for every digit and which neurons light up
-in each layer.
+The trained network also runs **in the browser**. You write a digit on squared paper,
+where each square is one of the 784 pixels the network sees. It predicts as you write,
+circles its answer in red pen, and shows how likely every digit is and which neurons fire.
 
-<p align="center"><img src="docs/images/web_demo.jpg" width="85%" alt="Web demo: a hand-drawn 3 recognised with 96% confidence"></p>
+<p align="center"><img src="docs/images/web_demo.jpg" width="85%" alt="Web demo: a European-style 1 with a long flag, recognised with 96% confidence"></p>
 
 **Try it:** open [`web/index.html`](web) in any browser. There's no server or install;
 it works straight from the folder.
 
 How the demo is built:
-* [`web/export_model.py`](web/export_model.py) compresses the trained weights to **8-bit integers**
-  (one scale per neuron). The model is 4× smaller and test accuracy is unchanged (98.27% → 98.27%).
+* [`web/train_demo_model.py`](web/train_demo_model.py) trains on MNIST **plus generated digits in writing
+  styles MNIST lacks** (see experiment 7 below).
+* [`web/export_model.py`](web/export_model.py) compresses the weights to **8-bit integers**
+  (one scale per neuron). The model is 4× smaller with no loss in test accuracy (98.41% → 98.43%).
 * [`web/app.js`](web/app.js) re-implements the forward pass in plain JavaScript, with no libraries.
   Drawings get the same preprocessing as MNIST: crop, scale to 20×20, centre by centre of mass.
 * On load, the page checks itself against reference outputs from Python and agrees to within **5e-5**.
@@ -48,8 +50,8 @@ How the demo is built:
 | **Optimizers** | `SGD`, momentum, Nesterov, `RMSProp`, `Adam`; global-norm gradient clipping |
 | **Training** | mini-batch loop, validation tracking, early stopping with best-weight restore, `StepDecay` / `CosineDecay` LR schedules |
 | **Utilities** | save/load weights (`.npz`), model summary, accuracy, confusion matrix, precision/recall/F1 report |
-| **Data** | XOR, spirals, moons, circles, sine regression, MNIST loader, train/test split, standardisation |
-| **Verification** | finite-difference gradient checker; 26 unit tests |
+| **Data** | XOR, spirals, moons, circles, sine regression, MNIST loader, synthetic handwriting in 26 styles, train/test split, standardisation |
+| **Verification** | finite-difference gradient checker; 28 unit tests |
 | **Plots** | loss curves, decision boundaries, regression fits, confusion matrices — pure-Python SVG + PNG encoder |
 
 ## Quick start
@@ -171,6 +173,34 @@ never receive a gradient and keep their random initial values (the speckled fram
 
 <p align="center"><img src="docs/images/mnist_weights.png" width="80%" alt="first-layer weights"></p>
 
+### 7. Writing styles MNIST misses — [`tinynet/handwriting.py`](tinynet/handwriting.py), [`web/train_demo_model.py`](web/train_demo_model.py)
+High test accuracy didn't mean the model could read *everyone's* handwriting. MNIST was
+written mostly by American writers, so styles common elsewhere are rare in it. In the web demo,
+a European **1 with a long flag** came out as "maybe a 1, 36% sure", and a **slashed 0** was read as an 8.
+
+**The fix: generate the missing data.** `tinynet/handwriting.py` draws 26 styles of the ten digits
+from stroke templates (flagged and based 1s, crossed 7s, open 4s, looped 2s, slashed 0s and more).
+Each one is randomised like real handwriting: slant, rotation, width, size, stroke thickness and
+pen wobble. Then it goes through exactly the same preprocessing as the web page.
+
+<p align="center"><img src="docs/images/styled_digits.png" width="80%" alt="one generated digit per style"></p>
+
+I retrained the same network on MNIST plus 13,000 generated digits and measured it on 2,600
+held-out ones made with a different random seed:
+
+| style | MNIST only | MNIST + styles |
+|---|---|---|
+| 1 with a long flag (European) | 47.0 % | **100 %** |
+| 0 with a slash | 35.0 % | **100 %** |
+| 1 with flag and base | 94.0 % | 100 % |
+| all 26 styles | 94.8 % | 100 % |
+| **MNIST test set (10,000 real digits)** | 98.27 % | **98.41 %** |
+
+The original benchmark *improved* too, so the extra variety helped rather than distracted.
+The 100% comes from the same generator the model trained on, so it's an optimistic number.
+The independent check is drawing in the real web page: 15 hand-drawn digits in these styles
+were all read correctly (90–98% confident), including the European 1 that went from 36% to 98%.
+
 ## How it works
 
 The design mirrors the big frameworks at a size you can read in one sitting:
@@ -184,8 +214,10 @@ tinynet/
 ├── gradcheck.py   numerical gradient checking
 ├── metrics.py     accuracy, confusion matrix, precision / recall / F1
 ├── datasets.py    toy datasets, preprocessing, MNIST loader
+├── handwriting.py synthetic digits in 26 writing styles, MNIST-style preprocessing
 └── viz.py         SVG charts + a tiny PNG encoder (no matplotlib)
 web/
+├── train_demo_model.py  MNIST + styled digits -> the demo model
 ├── export_model.py  trained weights -> 8-bit model.js
 └── index.html, app.js, style.css   the draw-a-digit demo
 ```

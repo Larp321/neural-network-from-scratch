@@ -5,92 +5,92 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Digit Reader</title>
   <meta name="description" content="Draw a digit and watch a neural network written from scratch in NumPy read it, live in your browser.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="intro">
-    <p class="eyebrow">tinynet · live demo</p>
-    <h1>Draw a digit</h1>
-    <p class="lede">A neural network I wrote from scratch (no ML libraries) reads your handwriting.
-      It runs entirely in your browser: 235,146 learned weights, 98.27% accurate on handwritten digits it has never seen.</p>
-  </header>
+  <main class="page">
+    <header class="intro">
+      <h1>Draw a number from 0 to 9</h1>
+      <p class="lede">A neural network I built from scratch, without any machine-learning library, reads it as you write.
+        It runs in your browser and gets <span id="accText">98%</span> of handwritten digits it has never seen right.</p>
+    </header>
 
-  <main class="grid">
-    <section class="card pad" aria-labelledby="draw-title">
-      <div class="card-head">
-        <h2 id="draw-title">Your digit</h2>
-        <span class="hint" id="hint">Draw one digit, 0–9, large and centered</span>
-      </div>
-      <div class="board-wrap">
-        <canvas id="board" width="280" height="280" aria-label="Drawing area. Draw a digit with your mouse, finger or stylus."></canvas>
-        <p class="board-empty" id="boardEmpty" aria-hidden="true">draw here</p>
-      </div>
-      <div class="controls">
-        <button type="button" id="clear" class="btn primary">Clear</button>
-        <span class="controls-label">or try a real test image:</span>
-      </div>
-      <div class="samples" id="samples" role="group" aria-label="Example digits from the MNIST test set"></div>
-    </section>
-
-    <section class="card pad" aria-labelledby="result-title" aria-live="polite">
-      <div class="card-head">
-        <h2 id="result-title">The network's answer</h2>
-      </div>
-      <div class="verdict">
-        <div class="big-digit" id="bigDigit">?</div>
-        <div>
-          <div class="confidence" id="confidence">Waiting for a drawing</div>
-          <div class="sub" id="runner"></div>
+    <section class="desk" aria-label="Drawing area and result">
+      <div class="sheet-col">
+        <div class="sheet">
+          <canvas id="board" width="280" height="280"
+            aria-label="Squared paper. Draw a digit here with your mouse, finger or stylus."></canvas>
+          <p class="sheet-empty" id="boardEmpty" aria-hidden="true">Write here</p>
         </div>
+        <p class="hint" id="hint">Each square is one pixel of what the network sees.</p>
+        <div class="tools">
+          <button type="button" id="clear" class="btn">Clear the paper</button>
+        </div>
+        <p class="samples-label" id="samplesLabel">Or pick a digit from the test set:</p>
+        <div class="samples" id="samples" role="group" aria-labelledby="samplesLabel"></div>
       </div>
-      <ol class="bars" id="bars" aria-label="Probability for each digit"></ol>
+
+      <div class="answer" aria-live="polite">
+        <div class="mark">
+          <span class="mark-digit" id="bigDigit">?</span>
+          <svg class="mark-ring" id="ring" viewBox="0 0 120 120" aria-hidden="true">
+            <path d="M88 20 C 60 4, 18 14, 12 52 C 6 92, 46 114, 78 104 C 108 94, 116 58, 100 32 C 94 22, 82 16, 70 15" />
+          </svg>
+        </div>
+        <p class="verdict" id="confidence">Start drawing on the squared paper.</p>
+        <p class="runner" id="runner"></p>
+        <figure class="scores">
+          <ol class="cols" id="bars" aria-label="How likely each digit is"></ol>
+          <figcaption>How likely each digit is</figcaption>
+        </figure>
+      </div>
     </section>
 
-    <section class="card pad wide" aria-labelledby="inside-title">
-      <div class="card-head">
-        <h2 id="inside-title">Inside the network</h2>
-        <span class="hint">brighter = more active</span>
-      </div>
+    <section class="inside" aria-labelledby="inside-title">
+      <h2 id="inside-title">What the network sees</h2>
+      <p class="section-lede">Your drawing passes through four layers. Darker squares are neurons firing more strongly.</p>
       <div class="pipeline">
         <figure>
-          <canvas id="seen" width="28" height="28" class="pixel"></canvas>
-          <figcaption><strong>Input · 784</strong>Your drawing shrunk to 28×28 pixels and centered, like the training data</figcaption>
+          <canvas id="seen" width="28" height="28" class="cells c28"></canvas>
+          <figcaption><strong>784 input pixels</strong> Your digit shrunk to 28 × 28 and centred, like the training images.</figcaption>
         </figure>
-        <div class="arrow" aria-hidden="true">→</div>
         <figure>
-          <canvas id="hidden1" width="16" height="16" class="pixel"></canvas>
-          <figcaption><strong>Hidden layer 1 · 256</strong>Neurons that detect strokes and edges</figcaption>
+          <canvas id="hidden1" width="16" height="16" class="cells c16"></canvas>
+          <figcaption><strong>256 neurons</strong> The first layer reacts to strokes and edges.</figcaption>
         </figure>
-        <div class="arrow" aria-hidden="true">→</div>
         <figure>
-          <canvas id="hidden2" width="16" height="8" class="pixel wide-pixel"></canvas>
-          <figcaption><strong>Hidden layer 2 · 128</strong>Combinations of those into parts of digits</figcaption>
+          <canvas id="hidden2" width="16" height="8" class="cells c16x8"></canvas>
+          <figcaption><strong>128 neurons</strong> The second combines them into parts of digits.</figcaption>
         </figure>
-        <div class="arrow" aria-hidden="true">→</div>
         <figure>
-          <canvas id="outputs" width="10" height="1" class="pixel out-pixel"></canvas>
-          <figcaption><strong>Output · 10</strong>One score per digit, 0 to 9</figcaption>
+          <canvas id="outputs" width="10" height="1" class="cells c10"></canvas>
+          <figcaption><strong>10 outputs</strong> One score per digit. The darkest square is the answer.</figcaption>
         </figure>
       </div>
     </section>
+
+    <section class="made" aria-labelledby="made-title">
+      <h2 id="made-title">How it was made</h2>
+      <ol class="steps">
+        <li><h3>Written by hand</h3>
+          <p>The forward pass, backpropagation and the Adam optimizer are my own NumPy code, checked against numerical gradients.</p></li>
+        <li><h3>Trained on many handwriting styles</h3>
+          <p>55,000 MNIST digits, plus generated digits in styles MNIST rarely contains, like a 1 with a long flag, a crossed 7 or a slashed 0.</p></li>
+        <li><h3>Shrunk for the web</h3>
+          <p>The weights are stored as 8-bit integers, making the model 4× smaller with the same accuracy.</p></li>
+        <li><h3>Run in your browser</h3>
+          <p>About 40 lines of JavaScript repeat the maths: multiply by the weights, add the biases, apply ReLU, then softmax. Nothing leaves your device.</p></li>
+      </ol>
+      <p class="verify" id="verify">Checking the browser maths against the Python model…</p>
+    </section>
+
+    <footer class="foot">
+      <a href="https://github.com/Larp321/neural-network-from-scratch">Read the source code on GitHub</a>
+    </footer>
   </main>
-
-  <section class="how" aria-labelledby="how-title">
-    <h2 id="how-title">How it works</h2>
-    <div class="steps">
-      <div><span class="num">1</span><h3>Trained from scratch</h3>
-        <p>Forward pass, backpropagation and the Adam optimizer were written by hand in NumPy, then trained on 55,000 handwritten digits (MNIST).</p></div>
-      <div><span class="num">2</span><h3>Compressed for the web</h3>
-        <p>Weights are stored as 8-bit integers with one scale per neuron, cutting the size by 4× with no loss in test accuracy (98.27% either way).</p></div>
-      <div><span class="num">3</span><h3>Runs in your browser</h3>
-        <p>About 40 lines of JavaScript repeat the same maths: multiply by the weights, add biases, apply ReLU, then softmax. Nothing is sent to a server.</p></div>
-    </div>
-    <p class="verify" id="verify">Checking the browser maths against the Python reference…</p>
-  </section>
-
-  <footer class="foot">
-    <a href="https://github.com/Larp321/neural-network-from-scratch">Source code on GitHub</a>
-  </footer>
 
   <script src="model.js"></script>
   <script src="app.js"></script>
