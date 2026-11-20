@@ -1,6 +1,6 @@
 # tinynet — a neural network from scratch in NumPy
 
-![tests](https://img.shields.io/badge/tests-26%20passing-brightgreen) ![python](https://img.shields.io/badge/python-3.9%2B-blue) ![deps](https://img.shields.io/badge/dependencies-numpy%20only-orange) ![license](https://img.shields.io/badge/license-MIT-lightgrey)
+![tests](https://img.shields.io/badge/tests-26%20passing-brightgreen) ![python](https://img.shields.io/badge/python-3.10%2B-blue) ![deps](https://img.shields.io/badge/dependencies-numpy%20only-orange) ![license](https://img.shields.io/badge/license-MIT-lightgrey)
 
 A small, readable deep-learning library built **without any ML framework** — no
 PyTorch, TensorFlow or scikit-learn. Every forward pass, every gradient and

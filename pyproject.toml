@@ -7,7 +7,7 @@ name = "tinynet"
 version = "1.0.0"
 description = "A small, readable neural network library written from scratch in NumPy"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = { text = "MIT" }
 dependencies = ["numpy>=1.21"]
 keywords = ["neural-network", "deep-learning", "numpy", "backpropagation", "education"]
