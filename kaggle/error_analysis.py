@@ -14,6 +14,7 @@ prediction and confidence) and prints a breakdown:
 """
 import base64
 import os
+import re
 import sys
 from collections import Counter
 from html import escape
@@ -33,7 +34,7 @@ def load(arch="cnn"):
     y_all, X_all = train[:, 0], train[:, 1:].astype(np.float32) / 255.0
     idx = np.random.default_rng(0).permutation(len(X_all))   # same split as digit_recognizer.py
     v = idx[:4200]
-    files = sorted(f for f in os.listdir(RUNS) if f.startswith(arch + "_seed") and not f.endswith("_weights.npz"))
+    files = sorted(f for f in os.listdir(RUNS) if re.fullmatch(rf"{arch}_seed\d+\.npz", f))
     per_model = np.stack([np.load(os.path.join(RUNS, f))["val"] for f in files])
     return X_all[v], y_all[v], per_model, files
 

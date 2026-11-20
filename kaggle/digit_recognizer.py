@@ -27,6 +27,7 @@ data (random shifts, small rotations and scaling), predictions averaged.
 """
 import argparse
 import os
+import re
 import sys
 import time
 
@@ -147,7 +148,7 @@ def main():
     X, y, Xv, yv = X_all[t], y_all[t], X_all[v], y_all[v]
 
     if args.combine:
-        files = sorted(f for f in os.listdir(runs) if f.startswith(args.arch + "_seed"))
+        files = sorted(f for f in os.listdir(runs) if re.fullmatch(rf"{args.arch}_seed\d+\.npz", f))
         probs = [np.load(os.path.join(runs, f)) for f in files]
         for f, p in zip(files, probs):
             print(f"{f:<24} validation accuracy {np.mean(p['val'].argmax(1) == yv):.4%}")
