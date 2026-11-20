@@ -1,12 +1,12 @@
 # tinynet — a neural network from scratch in NumPy
 
-![tests](https://img.shields.io/badge/tests-28%20passing-brightgreen) ![python](https://img.shields.io/badge/python-3.10%2B-blue) ![deps](https://img.shields.io/badge/dependencies-numpy%20only-orange) ![license](https://img.shields.io/badge/license-MIT-lightgrey)
+![tests](https://img.shields.io/badge/tests-32%20passing-brightgreen) ![python](https://img.shields.io/badge/python-3.10%2B-blue) ![deps](https://img.shields.io/badge/dependencies-numpy%20only-orange) ![license](https://img.shields.io/badge/license-MIT-lightgrey)
 
 A small, readable deep-learning library built **without any ML framework** — no
 PyTorch, TensorFlow or scikit-learn. Every forward pass, every gradient and
 every optimizer update is written by hand in NumPy (~1,100 lines including plotting), verified with
-numerical gradient checking, and demonstrated on seven experiments — including
-**98.27 % test accuracy on MNIST** handwritten digits.
+numerical gradient checking, and demonstrated on eight experiments — including
+**98.27 % test accuracy on MNIST** and a **Kaggle Digit Recognizer score of 0.99517** (top ~250) with its own convolutional layers.
 
 **[Try the live demo: draw a digit and watch the network read it](https://larp321.github.io/neural-network-from-scratch/)**
 
@@ -47,14 +47,14 @@ How the demo is built:
 
 | | |
 |---|---|
-| **Layers** | `Dense` (He / Xavier init, L2 weight decay), `Dropout` (inverted) |
+| **Layers** | `Dense` (He / Xavier init, L2 weight decay), `Conv2D` (im2col), `MaxPool2D`, `Reshape`/`Flatten`, `Dropout` (inverted); float32 or float64 |
 | **Activations** | `ReLU`, `LeakyReLU`, `Sigmoid`, `Tanh` (numerically stable) |
 | **Losses** | `SoftmaxCrossEntropy` (with label smoothing), `BinaryCrossEntropy`, `MSE` — fused with their output activation for stability |
 | **Optimizers** | `SGD`, momentum, Nesterov, `RMSProp`, `Adam`; global-norm gradient clipping |
 | **Training** | mini-batch loop, validation tracking, early stopping with best-weight restore, `StepDecay` / `CosineDecay` LR schedules |
 | **Utilities** | save/load weights (`.npz`), model summary, accuracy, confusion matrix, precision/recall/F1 report |
 | **Data** | XOR, spirals, moons, circles, sine regression, MNIST loader, synthetic handwriting in 26 styles, train/test split, standardisation |
-| **Verification** | finite-difference gradient checker; 28 unit tests |
+| **Verification** | finite-difference gradient checker; 32 unit tests |
 | **Plots** | loss curves, decision boundaries, regression fits, confusion matrices — pure-Python SVG + PNG encoder |
 
 ## Quick start
@@ -204,6 +204,41 @@ The 100% comes from the same generator the model trained on, so it's an optimist
 The independent check is drawing in the real web page: 15 hand-drawn digits in these styles
 were all read correctly (90–98% confident), including the European 1 that went from 36% to 98%.
 
+### 8. Kaggle Digit Recognizer: convolutional networks — [`tinynet/conv.py`](tinynet/conv.py), [`kaggle/`](kaggle)
+**Public leaderboard score: 0.99517 (tied for rank 246).**
+
+I entered Kaggle's [Digit Recognizer](https://www.kaggle.com/competitions/digit-recognizer) competition
+with networks built in tinynet. Kaggle's test digits come from MNIST, so models were trained **only on
+Kaggle's own `train.csv`**, never on MNIST. Many top leaderboard scores (1.000) come from models that
+have seen the test digits.
+
+The plain network topped out around 99.1%, so I added **convolutional layers** to tinynet:
+`Conv2D` (im2col, with the input gradient computed as a full convolution with the flipped kernel),
+`MaxPool2D`, `Reshape` and `Flatten`. They're checked against a naive loop and by numerical gradient checks.
+Profiling found two slowdowns: dropout was silently converting float32 to float64, and the first
+layer computed an input-image gradient nothing used. Fixing both made training 2.6× faster.
+
+| model (held out: 4,200 Kaggle training images) | accuracy |
+|---|---|
+| MLP ensemble 784-512-256-10 ×3, augmented | 99.07 % |
+| CNN (conv32-conv32-pool-conv64-conv64-pool-dense256) | 99.48–99.60 % |
+| **3-CNN ensemble**, 15 epochs, random shifts/rotations/scaling | **99.55 %** |
+| **Kaggle public leaderboard** | **99.517 %** |
+
+**Why it still fails.** I looked at all 19 held-out mistakes:
+
+<p align="center"><img src="docs/images/kaggle_errors.svg" width="95%" alt="all 19 validation mistakes"></p>
+
+* **Open-top 9s read as 4s** (5 mistakes, the largest group). At 28×28 the only difference is a 1–2 pixel gap.
+  9 has the highest error rate (1.7%).
+* **Ambiguous even to a person** (~5): a closed-top 4 that is a 9 in shape, a 0 written like the letter *a*,
+  an 8 like *ə*. Some are probably labelling noise.
+* **Thick ink merging strokes** (3): bold 3s and 6s whose gaps disappear and look like 8s.
+* **Rare styles** (~6): a Z-shaped 7, a 5 with a closed bowl, very curly 3s.
+
+The model usually knew: 15 of 19 mistakes were made at under 60% confidence, and in 18 of 19 the true
+digit was its second guess.
+
 ## How it works
 
 The design mirrors the big frameworks at a size you can read in one sitting:
@@ -217,6 +252,7 @@ tinynet/
 ├── gradcheck.py   numerical gradient checking
 ├── metrics.py     accuracy, confusion matrix, precision / recall / F1
 ├── datasets.py    toy datasets, preprocessing, MNIST loader
+├── conv.py        Conv2D (im2col), MaxPool2D, Reshape, Flatten
 ├── handwriting.py synthetic digits in 26 writing styles, MNIST-style preprocessing
 └── viz.py         SVG charts + a tiny PNG encoder (no matplotlib)
 web/
@@ -260,7 +296,7 @@ errors = check_model_gradients(model, X, y, SoftmaxCrossEntropy())
 * Writing numerically stable maths and a clean, tested, documented Python API.
 
 ## Possible extensions
-Batch normalisation · convolutional layers · a computational-graph autograd engine · GPU support via CuPy.
+Batch normalisation · test-time augmentation · a computational-graph autograd engine · GPU support via CuPy.
 
 ## License
 MIT
