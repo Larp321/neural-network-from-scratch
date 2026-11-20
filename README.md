@@ -8,6 +8,8 @@ every optimizer update is written by hand in NumPy (~1,100 lines including plott
 numerical gradient checking, and demonstrated on seven experiments — including
 **98.27 % test accuracy on MNIST** handwritten digits.
 
+**[Try the live demo: draw a digit and watch the network read it](https://larp321.github.io/neural-network-from-scratch/)**
+
 Even the charts below are drawn by a dependency-free SVG/PNG plotter written
 for this project.
 
@@ -26,7 +28,8 @@ circles its answer in red pen, and shows how likely every digit is and which neu
 
 <p align="center"><img src="docs/images/web_demo.jpg" width="85%" alt="Web demo: a European-style 1 with a long flag, recognised with 96% confidence"></p>
 
-**Try it:** open [`web/index.html`](web) in any browser. There's no server or install;
+**Try it live: [larp321.github.io/neural-network-from-scratch](https://larp321.github.io/neural-network-from-scratch/)**
+(works on phones too). Offline, open [`web/index.html`](web) in any browser. There's no server or install;
 it works straight from the folder.
 
 How the demo is built:
