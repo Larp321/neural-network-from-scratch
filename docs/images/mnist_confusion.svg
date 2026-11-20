@@ -1,0 +1,225 @@
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='490' height='510' viewBox='0 0 490 510'>
+<rect width='490' height='510' fill='white'/>
+<text x='245.0' y='26' text-anchor='middle' font-size='15' font-weight='600' fill='#222' font-family='Segoe UI, Helvetica, Arial, sans-serif'>MNIST test set - 98.27% accuracy</text>
+<rect x='70' y='60' width='40' height='40' fill='rgb(77,121,168)' stroke='white'/>
+<text x='90.0' y='84.0' text-anchor='middle' font-size='10' fill='white' font-family='Segoe UI, Helvetica, Arial, sans-serif'>972</text>
+<rect x='110' y='60' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='130.0' y='84.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='150' y='60' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='170.0' y='84.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='190' y='60' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='210.0' y='84.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='230' y='60' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='250.0' y='84.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='270' y='60' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='290.0' y='84.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='310' y='60' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='330.0' y='84.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>4</text>
+<rect x='350' y='60' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='370.0' y='84.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='390' y='60' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='410.0' y='84.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>2</text>
+<rect x='430' y='60' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='450.0' y='84.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<text x='62' y='84.0' text-anchor='end' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<text x='90.0' y='52' text-anchor='middle' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='70' y='100' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='90.0' y='124.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='110' y='100' width='40' height='40' fill='rgb(77,121,168)' stroke='white'/>
+<text x='130.0' y='124.0' text-anchor='middle' font-size='10' fill='white' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1125</text>
+<rect x='150' y='100' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='170.0' y='124.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>4</text>
+<rect x='190' y='100' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='210.0' y='124.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='230' y='100' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='250.0' y='124.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='270' y='100' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='290.0' y='124.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='310' y='100' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='330.0' y='124.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>2</text>
+<rect x='350' y='100' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='370.0' y='124.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='390' y='100' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='410.0' y='124.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='430' y='100' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='450.0' y='124.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<text x='62' y='124.0' text-anchor='end' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<text x='130.0' y='52' text-anchor='middle' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='70' y='140' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='90.0' y='164.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>2</text>
+<rect x='110' y='140' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='130.0' y='164.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='150' y='140' width='40' height='40' fill='rgb(78,121,169)' stroke='white'/>
+<text x='170.0' y='164.0' text-anchor='middle' font-size='10' fill='white' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1017</text>
+<rect x='190' y='140' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='210.0' y='164.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>2</text>
+<rect x='230' y='140' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='250.0' y='164.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='270' y='140' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='290.0' y='164.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='310' y='140' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='330.0' y='164.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='350' y='140' width='40' height='40' fill='rgb(253,254,254)' stroke='white'/>
+<text x='370.0' y='164.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>6</text>
+<rect x='390' y='140' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='410.0' y='164.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>4</text>
+<rect x='430' y='140' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='450.0' y='164.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<text x='62' y='164.0' text-anchor='end' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>2</text>
+<text x='170.0' y='52' text-anchor='middle' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>2</text>
+<rect x='70' y='180' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='90.0' y='204.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='110' y='180' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='130.0' y='204.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='150' y='180' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='170.0' y='204.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>3</text>
+<rect x='190' y='180' width='40' height='40' fill='rgb(79,122,169)' stroke='white'/>
+<text x='210.0' y='204.0' text-anchor='middle' font-size='10' fill='white' font-family='Segoe UI, Helvetica, Arial, sans-serif'>989</text>
+<rect x='230' y='180' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='250.0' y='204.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='270' y='180' width='40' height='40' fill='rgb(253,253,254)' stroke='white'/>
+<text x='290.0' y='204.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>8</text>
+<rect x='310' y='180' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='330.0' y='204.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='350' y='180' width='40' height='40' fill='rgb(253,254,254)' stroke='white'/>
+<text x='370.0' y='204.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>6</text>
+<rect x='390' y='180' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='410.0' y='204.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>3</text>
+<rect x='430' y='180' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='450.0' y='204.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<text x='62' y='204.0' text-anchor='end' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>3</text>
+<text x='210.0' y='52' text-anchor='middle' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>3</text>
+<rect x='70' y='220' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='90.0' y='244.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='110' y='220' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='130.0' y='244.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='150' y='220' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='170.0' y='244.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>3</text>
+<rect x='190' y='220' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='210.0' y='244.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='230' y='220' width='40' height='40' fill='rgb(79,122,169)' stroke='white'/>
+<text x='250.0' y='244.0' text-anchor='middle' font-size='10' fill='white' font-family='Segoe UI, Helvetica, Arial, sans-serif'>963</text>
+<rect x='270' y='220' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='290.0' y='244.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='310' y='220' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='330.0' y='244.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>2</text>
+<rect x='350' y='220' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='370.0' y='244.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>2</text>
+<rect x='390' y='220' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='410.0' y='244.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='430' y='220' width='40' height='40' fill='rgb(253,253,254)' stroke='white'/>
+<text x='450.0' y='244.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>8</text>
+<text x='62' y='244.0' text-anchor='end' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>4</text>
+<text x='250.0' y='52' text-anchor='middle' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>4</text>
+<rect x='70' y='260' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='90.0' y='284.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>2</text>
+<rect x='110' y='260' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='130.0' y='284.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='150' y='260' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='170.0' y='284.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='190' y='260' width='40' height='40' fill='rgb(253,253,254)' stroke='white'/>
+<text x='210.0' y='284.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>7</text>
+<rect x='230' y='260' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='250.0' y='284.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='270' y='260' width='40' height='40' fill='rgb(79,122,169)' stroke='white'/>
+<text x='290.0' y='284.0' text-anchor='middle' font-size='10' fill='white' font-family='Segoe UI, Helvetica, Arial, sans-serif'>875</text>
+<rect x='310' y='260' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='330.0' y='284.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>4</text>
+<rect x='350' y='260' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='370.0' y='284.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>2</text>
+<rect x='390' y='260' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='410.0' y='284.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='430' y='260' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='450.0' y='284.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<text x='62' y='284.0' text-anchor='end' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>5</text>
+<text x='290.0' y='52' text-anchor='middle' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>5</text>
+<rect x='70' y='300' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='90.0' y='324.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>4</text>
+<rect x='110' y='300' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='130.0' y='324.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>2</text>
+<rect x='150' y='300' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='170.0' y='324.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='190' y='300' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='210.0' y='324.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='230' y='300' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='250.0' y='324.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>3</text>
+<rect x='270' y='300' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='290.0' y='324.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>4</text>
+<rect x='310' y='300' width='40' height='40' fill='rgb(78,122,169)' stroke='white'/>
+<text x='330.0' y='324.0' text-anchor='middle' font-size='10' fill='white' font-family='Segoe UI, Helvetica, Arial, sans-serif'>942</text>
+<rect x='350' y='300' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='370.0' y='324.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='390' y='300' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='410.0' y='324.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>2</text>
+<rect x='430' y='300' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='450.0' y='324.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<text x='62' y='324.0' text-anchor='end' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>6</text>
+<text x='330.0' y='52' text-anchor='middle' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>6</text>
+<rect x='70' y='340' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='90.0' y='364.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='110' y='340' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='130.0' y='364.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>4</text>
+<rect x='150' y='340' width='40' height='40' fill='rgb(253,254,254)' stroke='white'/>
+<text x='170.0' y='364.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>7</text>
+<rect x='190' y='340' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='210.0' y='364.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='230' y='340' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='250.0' y='364.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='270' y='340' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='290.0' y='364.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='310' y='340' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='330.0' y='364.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='350' y='340' width='40' height='40' fill='rgb(79,122,169)' stroke='white'/>
+<text x='370.0' y='364.0' text-anchor='middle' font-size='10' fill='white' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1009</text>
+<rect x='390' y='340' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='410.0' y='364.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='430' y='340' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='450.0' y='364.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>5</text>
+<text x='62' y='364.0' text-anchor='end' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>7</text>
+<text x='370.0' y='52' text-anchor='middle' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>7</text>
+<rect x='70' y='380' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='90.0' y='404.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>4</text>
+<rect x='110' y='380' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='130.0' y='404.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='150' y='380' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='170.0' y='404.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>2</text>
+<rect x='190' y='380' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='210.0' y='404.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>2</text>
+<rect x='230' y='380' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='250.0' y='404.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>3</text>
+<rect x='270' y='380' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='290.0' y='404.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>5</text>
+<rect x='310' y='380' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='330.0' y='404.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='350' y='380' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='370.0' y='404.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>3</text>
+<rect x='390' y='380' width='40' height='40' fill='rgb(80,123,170)' stroke='white'/>
+<text x='410.0' y='404.0' text-anchor='middle' font-size='10' fill='white' font-family='Segoe UI, Helvetica, Arial, sans-serif'>951</text>
+<rect x='430' y='380' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='450.0' y='404.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>4</text>
+<text x='62' y='404.0' text-anchor='end' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>8</text>
+<text x='410.0' y='52' text-anchor='middle' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>8</text>
+<rect x='70' y='420' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='90.0' y='444.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='110' y='420' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='130.0' y='444.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>2</text>
+<rect x='150' y='420' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='170.0' y='444.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='190' y='420' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='210.0' y='444.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>5</text>
+<rect x='230' y='420' width='40' height='40' fill='rgb(253,253,254)' stroke='white'/>
+<text x='250.0' y='444.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>9</text>
+<rect x='270' y='420' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='290.0' y='444.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>3</text>
+<rect x='310' y='420' width='40' height='40' fill='rgb(255,255,255)' stroke='white'/>
+<text x='330.0' y='444.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>0</text>
+<rect x='350' y='420' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='370.0' y='444.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>4</text>
+<rect x='390' y='420' width='40' height='40' fill='rgb(254,254,254)' stroke='white'/>
+<text x='410.0' y='444.0' text-anchor='middle' font-size='10' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>1</text>
+<rect x='430' y='420' width='40' height='40' fill='rgb(80,123,170)' stroke='white'/>
+<text x='450.0' y='444.0' text-anchor='middle' font-size='10' fill='white' font-family='Segoe UI, Helvetica, Arial, sans-serif'>984</text>
+<text x='62' y='444.0' text-anchor='end' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>9</text>
+<text x='450.0' y='52' text-anchor='middle' font-size='11' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>9</text>
+<text x='270.0' y='496' text-anchor='middle' font-size='12' fill='#333' font-family='Segoe UI, Helvetica, Arial, sans-serif'>predicted (columns) vs true (rows)</text>
+</svg>
