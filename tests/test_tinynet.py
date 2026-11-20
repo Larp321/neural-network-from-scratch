@@ -69,6 +69,59 @@ class TestGradients(unittest.TestCase):
         self._check(model, y, SoftmaxCrossEntropy())
 
 
+class TestConvolution(unittest.TestCase):
+    def test_conv_matches_naive_loop(self):
+        from tinynet import Conv2D
+        rng = np.random.default_rng(0)
+        for stride, pad in [(1, 1), (2, 0), (2, 1)]:
+            conv = Conv2D(2, 3, kernel_size=3, padding=pad, stride=stride, rng=rng)
+            x = rng.normal(size=(2, 2, 7, 7))
+            out = conv.forward(x)
+            W, b = conv.params["W"], conv.params["b"]
+            xp = np.pad(x, ((0, 0), (0, 0), (pad, pad), (pad, pad)))
+            ho = (7 + 2 * pad - 3) // stride + 1
+            ref = np.zeros((2, 3, ho, ho))
+            for n in range(2):
+                for o in range(3):
+                    for i in range(ho):
+                        for j in range(ho):
+                            patch = xp[n, :, i * stride:i * stride + 3, j * stride:j * stride + 3]
+                            ref[n, o, i, j] = np.sum(patch * W[o]) + b[o]
+            np.testing.assert_allclose(out, ref, atol=1e-12)
+
+    def test_cnn_gradients(self):
+        from tinynet import Conv2D, Flatten, MaxPool2D, Reshape
+        r = np.random.default_rng(1)
+        model = Sequential([
+            Reshape((2, 6, 6)),
+            Conv2D(2, 3, 3, padding=1, rng=r, l2=0.01), Tanh(), MaxPool2D(2),
+            Conv2D(3, 4, 3, padding=1, stride=2, rng=r), Tanh(),
+            Flatten(), Dense(16, 3, rng=r),
+        ])
+        X, y = r.normal(size=(3, 72)), np.array([0, 2, 1])
+        for name, err in check_model_gradients(model, X, y, SoftmaxCrossEntropy()).items():
+            self.assertLess(err, TOL, f"parameter {name}: relative error {err:.2e}")
+        self.assertLess(check_input_gradient(model, X, y, SoftmaxCrossEntropy()), TOL)
+
+    def test_maxpool_routes_gradient_to_max(self):
+        from tinynet import MaxPool2D
+        pool = MaxPool2D(2)
+        x = np.array([[[[1., 5.], [3., 2.]]]])
+        np.testing.assert_array_equal(pool.forward(x), [[[[5.]]]])
+        np.testing.assert_array_equal(pool.backward(np.array([[[[7.]]]])), [[[[0., 7.], [0., 0.]]]])
+
+    def test_float32_cnn_trains(self):
+        from tinynet import Conv2D, Flatten, MaxPool2D, Reshape
+        r = np.random.default_rng(2)
+        X = r.normal(size=(64, 64)).astype(np.float32)
+        y = (X[:, :32].sum(1) > X[:, 32:].sum(1)).astype(int)
+        model = Sequential([Reshape((1, 8, 8)), Conv2D(1, 4, 3, padding=1, rng=r, dtype=np.float32), ReLU(),
+                            MaxPool2D(2), Flatten(), Dense(64, 2, rng=r, dtype=np.float32)], eval_batch_size=16)
+        h = model.fit(X, y, SoftmaxCrossEntropy(), Adam(0.01), epochs=40, batch_size=16, rng=r, verbose=0)
+        self.assertEqual(model.layers[1].params["W"].dtype, np.float32)
+        self.assertGreater(h["acc"][-1], 0.9)
+
+
 class TestLayers(unittest.TestCase):
     def test_dense_shapes_and_init(self):
         d = Dense(10, 7, rng=np.random.default_rng(0))

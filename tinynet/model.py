@@ -29,8 +29,9 @@ class Sequential:
     >>> net = Sequential([Dense(2, 16), ReLU(), Dense(16, 3)])
     """
 
-    def __init__(self, layers: Sequence[Layer]) -> None:
+    def __init__(self, layers: Sequence[Layer], eval_batch_size: int = 1024) -> None:
         self.layers = list(layers)
+        self.eval_batch_size = eval_batch_size  # inference runs in chunks to bound memory (CNNs)
 
     # ------------------------------------------------------------------ core
     def forward(self, x: np.ndarray, training: bool = False) -> np.ndarray:
@@ -43,6 +44,8 @@ class Sequential:
     def backward(self, grad: np.ndarray) -> np.ndarray:
         for layer in reversed(self.layers):
             grad = layer.backward(grad)
+            if grad is None:  # a layer that skips its input gradient ends backpropagation
+                break
         return grad
 
     def trainable_layers(self) -> list[Layer]:
@@ -58,7 +61,7 @@ class Sequential:
         """One forward/backward/update pass on a mini-batch. Returns the batch loss."""
         out = self.forward(x, training=True)
         value = loss.forward(out, y) + self.regularization_loss()
-        self.backward(loss.backward())
+        self.backward(loss.backward().astype(out.dtype, copy=False))  # keep float32 models in float32
         optimizer.step(self.trainable_layers())
         return value
 
@@ -78,12 +81,15 @@ class Sequential:
         rng: np.random.Generator | None = None,
         verbose: int = 1,
         log_every: int = 1,
+        train_accuracy: bool = True,
     ) -> History:
         """Train with mini-batch gradient descent.
 
         early_stopping : stop after this many epochs without validation-loss
             improvement and restore the best weights (requires validation_data).
         verbose : 0 = silent, 1 = one line every ``log_every`` epochs.
+        train_accuracy : re-evaluate accuracy on the whole training set after each
+            epoch (set False for large datasets/CNNs to save an extra pass).
         """
         rng = rng if rng is not None else np.random.default_rng()
         n = X.shape[0]
@@ -107,8 +113,8 @@ class Sequential:
             history["loss"].append(train_loss)
             history["lr"].append(optimizer.lr)
             msg = f"epoch {epoch + 1:>4}/{epochs}  loss {train_loss:.4f}"
-            if classify:
-                history["acc"].append(accuracy(self.forward(X), y))
+            if classify and train_accuracy:
+                history["acc"].append(accuracy(self.predict_logits(X), y))
                 msg += f"  acc {history['acc'][-1]:.3f}"
 
             if validation_data is not None:
@@ -141,13 +147,20 @@ class Sequential:
         The L2 penalty is *not* included, so validation losses are comparable
         between regularized and unregularized models.
         """
-        out = self.forward(X)
+        out = self.predict_logits(X)
         acc = float("nan") if isinstance(loss, MSE) else accuracy(out, y)
         return loss.forward(out, y), acc
 
-    def predict(self, X: np.ndarray, batch_size: int = 4096) -> np.ndarray:
+    def predict_logits(self, X: np.ndarray) -> np.ndarray:
+        """Raw network output for ``X``, computed in chunks of ``eval_batch_size``."""
+        bs = self.eval_batch_size
+        if len(X) <= bs:
+            return self.forward(X)
+        return np.concatenate([self.forward(X[i : i + bs]) for i in range(0, len(X), bs)])
+
+    def predict(self, X: np.ndarray) -> np.ndarray:
         """Predicted class labels (argmax for multi-class, logit > 0 for binary)."""
-        out = np.concatenate([self.forward(X[i : i + batch_size]) for i in range(0, len(X), batch_size)])
+        out = self.predict_logits(X)
         if out.shape[1] == 1:
             return (out[:, 0] > 0).astype(int)
         return out.argmax(axis=1)

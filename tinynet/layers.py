@@ -44,6 +44,7 @@ class Dense(Layer):
     in_features, out_features : layer shape.
     init : "he" (good for ReLU), "xavier" (good for tanh/sigmoid) or "normal".
     l2 : L2 weight-decay strength (adds ``0.5 * l2 * ||W||^2`` to the loss).
+    dtype : parameter dtype; np.float32 halves memory and roughly doubles speed.
     """
 
     def __init__(
@@ -53,6 +54,7 @@ class Dense(Layer):
         init: str = "he",
         l2: float = 0.0,
         rng: np.random.Generator | None = None,
+        dtype=np.float64,
     ) -> None:
         super().__init__()
         rng = rng if rng is not None else np.random.default_rng()
@@ -67,8 +69,8 @@ class Dense(Layer):
         self.in_features = in_features
         self.out_features = out_features
         self.l2 = l2
-        self.params["W"] = rng.normal(0.0, std, size=(in_features, out_features))
-        self.params["b"] = np.zeros(out_features)
+        self.params["W"] = rng.normal(0.0, std, size=(in_features, out_features)).astype(dtype)
+        self.params["b"] = np.zeros(out_features, dtype=dtype)
         self.grads["W"] = np.zeros_like(self.params["W"])
         self.grads["b"] = np.zeros_like(self.params["b"])
         self._x: np.ndarray | None = None
@@ -154,7 +156,7 @@ class Dropout(Layer):
         if not training or self.p == 0.0:
             self._mask = None
             return x
-        self._mask = (self.rng.random(x.shape) >= self.p) / (1.0 - self.p)
+        self._mask = ((self.rng.random(x.shape) >= self.p) / (1.0 - self.p)).astype(x.dtype, copy=False)
         return x * self._mask
 
     def backward(self, grad):
