@@ -6,6 +6,11 @@
            python kaggle/digit_recognizer.py --seeds 1 &
            python kaggle/digit_recognizer.py --seeds 2 &
     3. python kaggle/digit_recognizer.py --combine      # -> data/kaggle/submission.csv
+
+    Weights are checkpointed after every epoch. To stop early, create the file
+    data/kaggle/runs/STOP: each run finishes its current epoch and saves its
+    predictions. (Or kill it and use --from-checkpoint --seeds N to predict
+    from the last saved epoch.)
     4. Upload data/kaggle/submission.csv on the competition's "Submit Predictions" page
 
 Honest-score rule: Kaggle's test images are drawn from MNIST, so this script
@@ -34,6 +39,7 @@ from tinynet import (Adam, Conv2D, CosineDecay, Dense, Dropout, Flatten, MaxPool
 from tinynet.metrics import accuracy  # noqa: E402
 
 DATA = os.path.join(ROOT, "data", "kaggle")
+RUNS = os.path.join(DATA, "runs")
 
 
 def load_csv(name):
@@ -102,6 +108,11 @@ def train_one(X, y, Xv, yv, epochs, seed, arch="cnn"):
         if Xv is not None:
             msg += f"  val_acc {accuracy(model.predict_logits(Xv), yv):.4f}"
         print(msg + f"  ({time.perf_counter() - t:.0f}s)", flush=True)
+        # checkpoint every epoch, so a long run can be stopped without losing it
+        model.save(os.path.join(RUNS, f"{arch}_seed{seed}_checkpoint.npz"))
+        if os.path.exists(os.path.join(RUNS, "STOP")):
+            print(f"  STOP file found - finishing model {seed} after epoch {epoch + 1}", flush=True)
+            break
     return model
 
 
@@ -122,8 +133,10 @@ def main():
     ap.add_argument("--combine", action="store_true",
                     help="average every saved model of --arch into data/kaggle/submission.csv")
     ap.add_argument("--limit", type=int, default=0, help="use only the first N training images (quick tests)")
+    ap.add_argument("--from-checkpoint", action="store_true",
+                    help="skip training: load each seed's last checkpoint and save its predictions")
     args = ap.parse_args()
-    runs = os.path.join(DATA, "runs")
+    runs = RUNS
     os.makedirs(runs, exist_ok=True)
 
     train = load_csv("train.csv")
@@ -148,7 +161,11 @@ def main():
         X, y = X[:args.limit], y[:args.limit]
     print(f"train {X.shape}  validation {Xv.shape}  test {test.shape}", flush=True)
     for seed in args.seeds:
-        model = train_one(X, y, Xv, yv, args.epochs, seed, args.arch)
+        if args.from_checkpoint:
+            model = (build_cnn if args.arch == "cnn" else build_mlp)(np.random.default_rng(seed))
+            model.load(os.path.join(runs, f"{args.arch}_seed{seed}_checkpoint.npz"))
+        else:
+            model = train_one(X, y, Xv, yv, args.epochs, seed, args.arch)
         val, tst = softmax(model.predict_logits(Xv)), softmax(model.predict_logits(test))
         np.savez(os.path.join(runs, f"{args.arch}_seed{seed}.npz"), val=val, test=tst)
         model.save(os.path.join(runs, f"{args.arch}_seed{seed}_weights.npz"))
