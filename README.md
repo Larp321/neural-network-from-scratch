@@ -18,6 +18,24 @@ for this project.
 <p align="center"><em>Three interleaved spirals. A linear model can only draw straight lines (50.7% test accuracy);
 a 2-hidden-layer network learns the curved boundary (99.3%).</em></p>
 
+## Live demo: draw a digit
+
+The trained MNIST network also runs **in the browser**. Draw a digit and it predicts
+as you draw, showing the probability for every digit and which neurons light up
+in each layer.
+
+<p align="center"><img src="docs/images/web_demo.jpg" width="85%" alt="Web demo: a hand-drawn 3 recognised with 96% confidence"></p>
+
+**Try it:** open [`web/index.html`](web) in any browser. There's no server or install;
+it works straight from the folder.
+
+How the demo is built:
+* [`web/export_model.py`](web/export_model.py) compresses the trained weights to **8-bit integers**
+  (one scale per neuron). The model is 4× smaller and test accuracy is unchanged (98.27% → 98.27%).
+* [`web/app.js`](web/app.js) re-implements the forward pass in plain JavaScript, with no libraries.
+  Drawings get the same preprocessing as MNIST: crop, scale to 20×20, centre by centre of mass.
+* On load, the page checks itself against reference outputs from Python and agrees to within **5e-5**.
+
 ---
 
 ## Features
@@ -167,6 +185,9 @@ tinynet/
 ├── metrics.py     accuracy, confusion matrix, precision / recall / F1
 ├── datasets.py    toy datasets, preprocessing, MNIST loader
 └── viz.py         SVG charts + a tiny PNG encoder (no matplotlib)
+web/
+├── export_model.py  trained weights -> 8-bit model.js
+└── index.html, app.js, style.css   the draw-a-digit demo
 ```
 
 One training step:
