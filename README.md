@@ -37,7 +37,8 @@ a 2-hidden-layer network learns the curved boundary (99.3%).</em></p>
 ## Quick start
 
 ```bash
-git clone <your-repo-url> tinynet && cd tinynet
+git clone https://github.com/Larp321/neural-network-from-scratch.git
+cd neural-network-from-scratch
 pip install -r requirements.txt          # just numpy
 python examples/spiral.py                # train + write plots to docs/images/
 python -m unittest discover -s tests -v  # run the test-suite
